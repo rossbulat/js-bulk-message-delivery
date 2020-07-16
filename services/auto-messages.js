@@ -17,7 +17,6 @@ module.exports = {
       }
 
       // generate messages
-      const db = client.db('creview');
       for (let i = 0; i < accounts.length; i++) {
 
         let firstName = accounts[i].name.replace(/ .*/, '');
@@ -28,7 +27,8 @@ module.exports = {
 
         // insert messages
         for (let template of templates) {
-          await db
+          await client
+            .db('my-database')
             .collection('messages')
             .insertOne({
               user_id: accounts[i]._id,
