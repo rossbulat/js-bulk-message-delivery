@@ -11,7 +11,7 @@ module.exports = {
   generateWelcomeMessages: async function (client) {
     try {
       // get accounts that need welcome messages
-      const accounts = await Accounts.welcomeMessage(client);
+      const accounts = await Accounts.accountsToWelcome(client);
       if (accounts.length === 0) {
         return;
       }
@@ -42,7 +42,7 @@ module.exports = {
         }
 
         // update to completed
-        await Accounts.welcomeMessageCompleted(client, accounts[i]._id);
+        await Accounts.accountsWelcomeSent(client, accounts[i]._id);
       }
     } catch (e) {
     }

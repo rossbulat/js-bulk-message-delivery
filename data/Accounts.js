@@ -1,9 +1,9 @@
 module.exports = {
 
-  /* accountsWelcomeMessage
+  /* accountsToWelcome
    * collects all accounts that meet this message type requirements.
    */
-  welcomeMessage: async (client) => {
+  accountsToWelcome: async (client) => {
 
     const accounts = await client
       .db('my-database')
@@ -19,10 +19,10 @@ module.exports = {
     return accounts;
   },
 
-  /* accountsWelcomeMessageCompleted
+  /* accountsWelcomeSent
    * marks welcome message sent for an account.
    */
-  welcomeMessageCompleted: async (client, _id) => {
+  accountsWelcomeSent: async (client, _id) => {
 
     await client
       .db('my-database')
