@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "moment": "^2.24.0",
+    "mongodb": "^3.5.2",
+    "node-apple-receipt-verify": "^1.7.4"
+  }
+}
