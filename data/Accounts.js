@@ -1,12 +1,13 @@
+const { Connection } = require('../connection')
+
 module.exports = {
 
   /* accountsToWelcome
    * collects all accounts that meet this message type requirements.
    */
-  accountsToWelcome: async (client) => {
+  accountsToWelcome: async () => {
 
-    const accounts = await client
-      .db('my-database')
+    const accounts = await Connection.db
       .collection('users')
       .find({
         'meta.sentWelcome': false,
@@ -22,10 +23,9 @@ module.exports = {
   /* accountsWelcomeSent
    * marks welcome message sent for an account.
    */
-  accountsWelcomeSent: async (client, _id) => {
+  accountsWelcomeSent: async (_id) => {
 
-    await client
-      .db('my-database')
+    await Connection.db
       .collection('users')
       .updateOne({
         _id: _id

@@ -2,16 +2,17 @@ const moment = require('moment');
 const Accounts = require('../data/Accounts');
 const Template_Welcome = require('../templates/welcome');
 const Template_HowTo = require('../templates/how-to-use');
+const { Connection } = require('../connection')
 
 // interval duration
 const interval = 60 * 1000 * 30; // 30 minutes
 
 module.exports = {
 
-  generateWelcomeMessages: async function (client) {
+  generateWelcomeMessages: async function () {
     try {
       // get accounts that need welcome messages
-      const accounts = await Accounts.accountsToWelcome(client);
+      const accounts = await Accounts.accountsToWelcome();
       if (accounts.length === 0) {
         return;
       }
@@ -27,8 +28,7 @@ module.exports = {
 
         // insert messages
         for (let template of templates) {
-          await client
-            .db('my-database')
+          await Connection.db
             .collection('messages')
             .insertOne({
               user_id: accounts[i]._id,
@@ -42,16 +42,16 @@ module.exports = {
         }
 
         // update to completed
-        await Accounts.accountsWelcomeSent(client, accounts[i]._id);
+        await Accounts.accountsWelcomeSent(accounts[i]._id);
       }
     } catch (e) {
     }
   },
 
-  init: async function (client) {
-    module.exports.generateWelcomeMessages(client);
+  init: async function () {
+    module.exports.generateWelcomeMessages();
     setInterval(async function () {
-      module.exports.generateWelcomeMessages(client);
+      module.exports.generateWelcomeMessages();
     }, interval)
   }
 };
