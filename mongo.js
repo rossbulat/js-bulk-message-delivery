@@ -1,5 +1,4 @@
 const MongoClient = require('mongodb').MongoClient
-const conf = require('./confidential');
 
 class Connection {
 
