@@ -2,7 +2,7 @@ const moment = require('moment');
 const Accounts = require('../data/Accounts');
 const Template_Welcome = require('../templates/welcome');
 const Template_HowTo = require('../templates/how-to-use');
-const { Connection } = require('../connection')
+const { Connection } = require('../mongo')
 
 // interval duration
 const interval = 60 * 1000 * 30; // 30 minutes
